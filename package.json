@@ -1,0 +1,40 @@
+{
+  "name": "web-test-codeceptjs",
+  "version": "1.0.0",
+  "description": "Web end to end testes with CodeceptJS",
+  "scripts": {
+    "clean": "rimraf output",
+    "def": "codeceptjs def",
+    "lint": "eslint . --fix",
+    "test": "codeceptjs run --steps",
+    "tags": "codeceptjs run --steps --grep $TAGS",
+    "allure-generate": "allure generate output",
+    "allure": "allure serve output"
+  },
+  "keywords": [
+    "codeceptjs",
+    "web"
+  ],
+  "author": "alecsandrobs",
+  "devDependencies": {
+    "codeceptjs": "3.0.4",
+    "eslint": "^6.5.1",
+    "eslint-plugin-codeceptjs": "^1.1.0",
+    "ts-node": "^10.1.0",
+    "tslint": "6.1.2",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@codeceptjs/configure": "0.6.2",
+    "@types/node": "^14.14.10",
+    "codeceptjs-expectwrapper": "^1.0.1",
+    "expect": "^26.6.2",
+    "nightmare": "3.0.2",
+    "playwright": "^1.13.1",
+    "protractor": "7.0.0",
+    "puppeteer": "^10.2.0",
+    "rimraf": "^3.0.2",
+    "testcafe": "1.15.1",
+    "webdriverio": "^5.23.0"
+  }
+}
