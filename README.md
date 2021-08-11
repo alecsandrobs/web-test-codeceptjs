@@ -19,6 +19,6 @@ npm run test
 
 ```
 TAGS=PeopleSearch npm run tags                      # Run tests with tag "PeopleSearch"
-TAGS='PeopleCreate|PeopleEdit' npm run tags           # Run tests with tags "PeopleCreate" or "PeopleEdit"
+TAGS='PeopleCreate|PeopleEdit' npm run tags         # Run tests with tags "PeopleCreate" or "PeopleEdit"
 TAGS='(?=.*Confirm)^(?!.*All)' npm run tags         # Run tests with tags "Confirm" but without tags "All"
 ```
