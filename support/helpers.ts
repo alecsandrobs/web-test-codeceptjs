@@ -1,5 +1,6 @@
-export const URL_BASE = 'https://alecsandro-imersao-javascript.herokuapp.com'
-const show = true
+export const URL_BASE = 'http://the-internet.herokuapp.com'
+export const URL_BASE_PEOPLE = 'https://alecsandro-imersao-javascript.herokuapp.com'
+const show = process.env.HEADLESS ? false : true
 const browser = 'chrome'
 const waitForAction = 500
 const getPageTimeout = 15000

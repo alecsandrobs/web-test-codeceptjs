@@ -18,9 +18,11 @@ exports.config = {
     REST: {
       endpoint: URL_BASE,
       onRequest: () => {
-        //request.headers.auth = "123";
       }
     },
+    AssertWrapper : {
+      require: 'codeceptjs-assert'
+    }
   },
   include: {
     I: './steps_file.ts'

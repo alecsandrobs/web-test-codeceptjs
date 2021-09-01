@@ -1,6 +1,7 @@
 export class Button {
     static salvar = 'Salvar'
-    static search = 'button[title="Pesquisar"]'
-    static edit = 'button[title="Editar"]'
-    static remove = 'button[title="Excluir"]'
+    static buttonTitle = (title: string) => `button[title="${title}"]`
+    static search = Button.buttonTitle('Pesquisar')
+    static edit = Button.buttonTitle('Editar')
+    static remove = Button.buttonTitle('Excluir')
 }

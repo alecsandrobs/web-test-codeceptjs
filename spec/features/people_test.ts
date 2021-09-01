@@ -3,9 +3,10 @@ import { Button } from '../pages/button.page';
 import { Message } from '../pages/message.page';
 import { People } from '../pages/people.pages';
 import { Input } from '../pages/input.page';
-const { I } = inject()
+import { URL_BASE_PEOPLE } from '../../support/helpers';
+const I = actor()
 
-Feature('People').tag('People')
+Feature('People').tag('People').config({ endpoint: URL_BASE_PEOPLE, url:  URL_BASE_PEOPLE}).config('REST', { endpoint: URL_BASE_PEOPLE })
 
 BeforeSuite(async () => {
 	await cleanPeople()
@@ -138,7 +139,7 @@ const existPeople = async (people: any) => {
 }
 
 const cleanPeople = async () => {
-    const people = await I.sendGetRequest('/pessoas')
+    const people:any = await I.sendGetRequest('/pessoas')
     if (people.data) {
         for (const person of people.data) {
             await I.sendDeleteRequest(`/pessoas/${person._id}`)

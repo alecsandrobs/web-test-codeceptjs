@@ -6,8 +6,12 @@
     "clean": "rimraf output",
     "def": "codeceptjs def",
     "lint": "eslint . --fix",
-    "test": "codeceptjs run --steps",
-    "tags": "codeceptjs run --steps --grep $TAGS",
+    "test:run": "codeceptjs run --steps",
+    "test:parallel": "HEADLESS=true codeceptjs run-workers --suites $WORKERS",
+    "tags": "failsafe clean test:tags",
+    "test": "failsafe clean test:run",
+    "parallel": "failsafe clean test:parallel",
+    "test:tags": "codeceptjs run --steps --grep $TAGS",
     "allure-generate": "allure generate output",
     "allure": "allure serve output"
   },
@@ -35,6 +39,10 @@
     "puppeteer": "^10.2.0",
     "rimraf": "^3.0.2",
     "testcafe": "1.15.1",
-    "webdriverio": "^5.23.0"
+    "webdriverio": "^5.23.0",
+    "npm-failsafe": "^0.4.3",
+    "form-data": "4.0.0",
+    "fs": "0.0.1-security",
+    "codeceptjs-assert": "0.0.5"
   }
 }
