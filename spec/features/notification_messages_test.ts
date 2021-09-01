@@ -1,3 +1,5 @@
+import { LinkPage } from '../pages/link.page';
+import { MessagesPage } from '../pages/messages.page';
 
 Feature('Notification Messages').tag('@NotificationMessages')
 
@@ -7,14 +9,10 @@ Before(async () =>
 
 Scenario('Showing a success message', async () => {
     for(let i=0; i<10; i++){
-        actor().click(link)
-        let text = await actor().grabTextFrom(messageNotice)
+        actor().click(LinkPage.clickHereLink)
+        let text = await actor().grabTextFrom(MessagesPage.messageNotice)
         if(!text.includes('Action unsuccesful, please try again')) break
-        actor().click(link)
+        actor().click(LinkPage.clickHereLink)
     }
-    actor().see(textMessageNotice, messageNotice)
+    actor().see('Action successful', MessagesPage.messageNotice)
 })
-
-const messageNotice = locate('#flash-messages').find('.flash.notice')
-const textMessageNotice = 'Action successful'
-const link = locate('a').withText('Click here')

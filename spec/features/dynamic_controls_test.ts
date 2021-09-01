@@ -1,3 +1,4 @@
+import { DynamicControlPage } from '../pages/dynamic_control.page';
 
 Feature('Dynamic Controls').tag('@DynamicControls')
 
@@ -6,29 +7,24 @@ Before(async () =>
 )
 
 Scenario('Hiding and showing an element', async () => {
-    actor().seeElementInDOM(checkbox)
+    actor().seeElementInDOM(DynamicControlPage.checkbox)
     actor().click('Remove')
-    actor().seeTextEquals("It's gone!", message)
-    actor().dontSeeElementInDOM(checkbox)
+    actor().seeTextEquals("It's gone!", DynamicControlPage.message)
+    actor().dontSeeElementInDOM(DynamicControlPage.checkbox)
     actor().click('Add')
-    actor().seeTextEquals("It's back!", message)
-    actor().seeElementInDOM(checkbox)
+    actor().seeTextEquals("It's back!", DynamicControlPage.message)
+    actor().seeElementInDOM(DynamicControlPage.checkbox)
 })
 
 Scenario('Enabling and disabling a field', async () => {
-    actor().seeElement(inputDisabled)
+    actor().seeElement(DynamicControlPage.inputDisabled)
     actor().click('Enable')
-    actor().seeTextEquals("It's enabled!", message)
-    actor().seeElement(inputEnabled)
-    actor().fillField(inputEnabled, "The book is on the table")
-    actor().seeInField(inputEnabled, "The book is on the table")
+    actor().seeTextEquals("It's enabled!", DynamicControlPage.message)
+    actor().seeElement(DynamicControlPage.inputEnabled)
+    actor().fillField(DynamicControlPage.inputEnabled, "The book is on the table")
+    actor().seeInField(DynamicControlPage.inputEnabled, "The book is on the table")
     actor().click('Disable')
-    actor().seeTextEquals("It's disabled!", message)
-    actor().seeElement(inputDisabled)
-    actor().seeInField(inputDisabled, "The book is on the table")
+    actor().seeTextEquals("It's disabled!", DynamicControlPage.message)
+    actor().seeElement(DynamicControlPage.inputDisabled)
+    actor().seeInField(DynamicControlPage.inputDisabled, "The book is on the table")
 })
-
-const checkbox = locate('#checkbox')
-const inputEnabled = locate('#input-example input[type="text"]:not(:disabled)')
-const inputDisabled = locate('#input-example input[type="text"]:disabled')
-const message = locate('#message')

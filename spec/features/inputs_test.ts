@@ -1,3 +1,4 @@
+import { InputPage } from '../pages/input.page';
 
 Feature('Inputs').tag('@Inputs')
 
@@ -14,8 +15,6 @@ const tableInputNumbers = [
 ]
 
 Data(tableInputNumbers).Scenario('Filling only number fields', async ({current}) => {
-    actor().fillField(field, current.valueSent)
-    actor().seeInField(field, current.valueShown)
+    actor().fillField(InputPage.exampleField, current.valueSent)
+    actor().seeInField(InputPage.exampleField, current.valueShown)
 })
-
-const field = locate('.example input[type="number"]')

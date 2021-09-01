@@ -1,8 +1,8 @@
 export { };
-import { Button } from '../pages/button.page';
-import { Message } from '../pages/message.page';
-import { People } from '../pages/people.pages';
-import { Input } from '../pages/input.page';
+import { ButtonPage } from '../pages/button.page';
+import { MessagePage } from '../pages/message.page';
+import { PeoplePage } from '../pages/people.pages';
+import { InputPage } from '../pages/input.page';
 import { URL_BASE_PEOPLE } from '../../support/helpers';
 const I = actor()
 
@@ -14,86 +14,86 @@ BeforeSuite(async () => {
 })
 
 Before(async () => {
-    await I.amOnPage('/#!/pessoas')
-    await I.wait(0.5)
-    await I.waitForElement(Input.search)
+    I.amOnPage('/#!/pessoas')
+    I.wait(0.5)
+    I.waitForElement(InputPage.search)
 })
 
 Scenario('People search', async () => {
-    await I.fillField(Input.search, 'Person Remove')
-    await I.click(Button.search)
-    await I.seeNumberOfElements(People.list, 2);
+    I.fillField(InputPage.search, 'Person Remove')
+    I.click(ButtonPage.search)
+    I.seeNumberOfElements(PeoplePage.list, 2);
 }).tag('@PeopleSearch')
 
 Scenario('Create person', async () => {
-    await I.click('Pessoa')
-    await I.fillField(People.fieldNome, personCreate.nome)
-    await I.fillField(People.fieldTelefone, personCreate.telefone)
-    await I.fillField(People.fieldEmail, personCreate.email)
-    await I.click(Button.salvar)
-    await I.seeTextEquals('Pessoa inserida com sucesso', Message.info)
-    await I.waitForDetached(Message.info)
-    await I.see(personCreate.nome, People.list)
-    await I.see(`${personCreate.nome}	${personCreate.telefone}	${personCreate.email}`, People.list) /* FUNCIONA COM Playwright e Puppeteer */
-    // await I.see(`${personCreate.nome} ${personCreate.telefone} ${personCreate.email}`, People.list) /* FUNCIONA COM Protractor e Webdriver */
+    I.click('Pessoa')
+    I.fillField(PeoplePage.fieldNome, personCreate.nome)
+    I.fillField(PeoplePage.fieldTelefone, personCreate.telefone)
+    I.fillField(PeoplePage.fieldEmail, personCreate.email)
+    I.click(ButtonPage.salvar)
+    I.seeTextEquals('Pessoa inserida com sucesso', MessagePage.info)
+    I.waitForDetached(MessagePage.info)
+    I.see(personCreate.nome, PeoplePage.list)
+    I.see(`${personCreate.nome}	${personCreate.telefone}	${personCreate.email}`, PeoplePage.list) /* FUNCIONA COM Playwright e Puppeteer */
+    // I.see(`${personCreate.nome} ${personCreate.telefone} ${personCreate.email}`, People.list) /* FUNCIONA COM Protractor e Webdriver */
 }).tag('PeopleCreate')
 
 Scenario('Update person', async () => {
-    await I.waitForElement(People.list)
-    await I.click(People.personEditIcon(personUpdate.nome))
-    await I.wait(1)
-    await I.waitForElement(People.fieldNome, 30);
-    await I.clearField(People.fieldNome)
-    await I.fillField(People.fieldNome, personUpdated.nome)
-    await I.clearField(People.fieldTelefone)
-    await I.fillField(People.fieldTelefone, personUpdated.telefone)
-    await I.clearField(People.fieldEmail)
-    await I.fillField(People.fieldEmail, personUpdated.email)
-    await I.click(Button.salvar)
-    await I.seeTextEquals('Pessoa atualizada com sucesso', Message.info)
-    await I.waitForDetached(Message.info)
-    await I.see(`${personUpdated.nome}	${personUpdated.telefone}	${personUpdated.email}`, People.list) /* FUNCIONA COM Playwright e Puppeteer */
-    // await I.see(`${personUpdated.nome} ${personUpdated.telefone} ${personUpdated.email}`, People.list)
+    I.waitForElement(PeoplePage.list)
+    I.click(PeoplePage.personEditIcon(personUpdate.nome))
+    I.wait(1)
+    I.waitForElement(PeoplePage.fieldNome, 30);
+    I.clearField(PeoplePage.fieldNome)
+    I.fillField(PeoplePage.fieldNome, personUpdated.nome)
+    I.clearField(PeoplePage.fieldTelefone)
+    I.fillField(PeoplePage.fieldTelefone, personUpdated.telefone)
+    I.clearField(PeoplePage.fieldEmail)
+    I.fillField(PeoplePage.fieldEmail, personUpdated.email)
+    I.click(ButtonPage.salvar)
+    I.seeTextEquals('Pessoa atualizada com sucesso', MessagePage.info)
+    I.waitForDetached(MessagePage.info)
+    I.see(`${personUpdated.nome}	${personUpdated.telefone}	${personUpdated.email}`, PeoplePage.list) /* FUNCIONA COM Playwright e Puppeteer */
+    // I.see(`${personUpdated.nome} ${personUpdated.telefone} ${personUpdated.email}`, People.list)
 }).tag('PeopleEdit').tag('AAA')
 
 Scenario('Remove person cancel', async () => {
-    await I.click(People.personRemoveIcon(personRemoveCancel.nome))
-    await I.see('Deseja realmente excluir o registro?', Message.info)
-    await I.click("Não tenho certeza")
-    await I.dontSeeElement(Message.info)
-    // await I.waitUntilExists(Message.info) ### Foi depreciado esse método, usar o I.waitForDetached(locate)
-    await I.see(`${personRemoveCancel.nome}	${personRemoveCancel.telefone}	${personRemoveCancel.email}`, People.list) /* FUNCIONA COM Playwright e Puppeteer */
-    // await I.see(`${personRemoveCancel.nome} ${personRemoveCancel.telefone} ${personRemoveCancel.email}`, People.list) /* FUNCIONA COM Protractor e Webdriver */
+    I.click(PeoplePage.personRemoveIcon(personRemoveCancel.nome))
+    I.see('Deseja realmente excluir o registro?', MessagePage.info)
+    I.click("Não tenho certeza")
+    I.dontSeeElement(MessagePage.info)
+    // I.waitUntilExists(Message.info) ### Foi depreciado esse método, usar o I.waitForDetached(locate)
+    I.see(`${personRemoveCancel.nome}	${personRemoveCancel.telefone}	${personRemoveCancel.email}`, PeoplePage.list) /* FUNCIONA COM Playwright e Puppeteer */
+    // I.see(`${personRemoveCancel.nome} ${personRemoveCancel.telefone} ${personRemoveCancel.email}`, People.list) /* FUNCIONA COM Protractor e Webdriver */
 }).tag('PeopleRemove').tag('Cancel')
 
 Scenario('Remove person confirm', async () => {
-    await I.click(People.personRemoveIcon(personRemove.nome))
-    await I.see('Deseja realmente excluir o registro?', Message.info)
-    await I.click("Sim!")
-    await I.seeTextEquals('Pessoa excluída com sucesso', Message.info)
-    await I.waitForDetached(Message.info)
-    await I.dontSee(`${personRemove.nome}	${personRemove.telefone}	${personRemove.email}`) /* FUNCIONA COM Protractor e Webdriver */
-    // await I.dontSee(`${personRemove.nome} ${personRemove.telefone} ${personRemove.email}`) /* FUNCIONA COM Protractor e Webdriver */
-    await I.seeElement(People.list);
-    await I.seeElementInDOM(People.list);
+    I.click(PeoplePage.personRemoveIcon(personRemove.nome))
+    I.see('Deseja realmente excluir o registro?', MessagePage.info)
+    I.click("Sim!")
+    I.seeTextEquals('Pessoa excluída com sucesso', MessagePage.info)
+    I.waitForDetached(MessagePage.info)
+    I.dontSee(`${personRemove.nome}	${personRemove.telefone}	${personRemove.email}`) /* FUNCIONA COM Protractor e Webdriver */
+    // I.dontSee(`${personRemove.nome} ${personRemove.telefone} ${personRemove.email}`) /* FUNCIONA COM Protractor e Webdriver */
+    I.seeElement(PeoplePage.list);
+    I.seeElementInDOM(PeoplePage.list);
 }).tag('PeopleRemove').tag('Confirm')
 
 Scenario('Remove all people confirm', async () => {
-    const element = locate(Button.remove)
-    await I.waitForElement(element, 30);
+    const element = locate(ButtonPage.remove)
+    I.waitForElement(element, 30);
     let ammount = await I.grabNumberOfVisibleElements(element)
     await removePeople(ammount)
-    await I.dontSeeElement(People.list);
-    await I.dontSeeElementInDOM(People.list);
+    I.dontSeeElement(PeoplePage.list);
+    I.dontSeeElementInDOM(PeoplePage.list);
 }).tag('PeopleRemove').tag('Confirm').tag('All')
 
 const removePeople = async (ammount:number) => {
     for (var i=0; i<ammount; i++) {
-        await I.click(Button.remove)
-        await I.see('Deseja realmente excluir o registro?', Message.info)
-        await I.click("Sim!")
-        await I.seeTextEquals('Pessoa excluída com sucesso', Message.info)
-        await I.waitForDetached(Message.info)
+        I.click(ButtonPage.remove)
+        I.see('Deseja realmente excluir o registro?', MessagePage.info)
+        I.click("Sim!")
+        I.seeTextEquals('Pessoa excluída com sucesso', MessagePage.info)
+        I.waitForDetached(MessagePage.info)
     }
 }
 
@@ -129,7 +129,7 @@ const personRemoveCancel = {
 const peopleExistent = [ personUpdate, personRemove, personRemoveCancel ]
 
 const existPerson = async (person: any) => {
-    await I.sendPostRequest('/pessoas', person)
+    I.sendPostRequest('/pessoas', person)
 }
 
 const existPeople = async (people: any) => {
@@ -139,10 +139,10 @@ const existPeople = async (people: any) => {
 }
 
 const cleanPeople = async () => {
-    const people:any = await I.sendGetRequest('/pessoas')
+    const people:any = I.sendGetRequest('/pessoas')
     if (people.data) {
         for (const person of people.data) {
-            await I.sendDeleteRequest(`/pessoas/${person._id}`)
+            I.sendDeleteRequest(`/pessoas/${person._id}`)
         }
     }
 }

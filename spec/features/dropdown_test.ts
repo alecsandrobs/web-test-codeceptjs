@@ -1,3 +1,4 @@
+import { DropdownPage } from '../pages/dropdown.page';
 
 Feature('Dropdown').tag('@Dropdown')
 
@@ -6,17 +7,12 @@ Before(async () =>
 )
 
 Scenario('Select option', async () => {
-    actor().selectOption(select(), option1Text)
-    actor().seeTextEquals(option1Text, selected())
+    actor().selectOption(DropdownPage.select, 'Option 1')
+    actor().seeTextEquals('Option 1', DropdownPage.selected)
 })
 
 Scenario('Change option', async () => {
-    actor().selectOption(select(), option2Text)
-    actor().selectOption(select(), option1Text)
-    actor().seeTextEquals(option1Text, selected())
+    actor().selectOption(DropdownPage.select, 'Option 2')
+    actor().selectOption(DropdownPage.select, 'Option 1')
+    actor().seeTextEquals('Option 1', DropdownPage.selected)
 })
-
-const option1Text = 'Option 1'
-const option2Text = 'Option 2'
-const select = () => locate('#dropdown')
-const selected = () => select().find('option').withAttr({selected: 'selected'})
