@@ -5,10 +5,6 @@ Before(async () =>
     actor().amOnPage('/login')
 )
 
-const userCredentials = new DataTable(['username', 'password', 'field'])
-userCredentials.add(['tomsmith', 'tomsmith', 'password'])
-userCredentials.add(['smithtom', 'SuperSecretPassword!', 'username'])
-
 Scenario('Successful login', async () => {
     actor().fillField(userField, 'tomsmith')
     actor().fillField(passField, 'SuperSecretPassword!')
@@ -19,6 +15,11 @@ Scenario('Successful login', async () => {
     actor().seeElement(linkElement)
     actor().dontSeeElementInDOM(buttonLogin)
 })
+
+const userCredentials = [
+    {username: 'tomsmith', password: 'tomsmith', field: 'password'},
+    {username: 'smithtom', password: 'SuperSecretPassword', field: 'username'},
+]
 
 Data(userCredentials).Scenario('Unsuccessful login', async ({current}) => {
     actor().fillField(userField, current.username)
